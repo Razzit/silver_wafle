@@ -32,10 +32,10 @@ public class ViewMaps {
 	JList<String> list;
 	String steamURL;
 	JOptionPane inputURL;
-	ArrayList<workshopMap> maps;
+	ArrayList<WorkshopMap> maps;
 	String[] data = {"test value", "test value", "test value"};
 	ArrayList<String> mapNames;
-	workshopMap newMap, newMap2, testingMap;
+	WorkshopMap newMap, newMap2, testingMap;
 	
 	JScrollPane scrollPane;
 	JList<String> list_1;
@@ -50,7 +50,7 @@ public class ViewMaps {
 	}
 
 	private void prepareGUI() {
-		maps = new ArrayList<workshopMap>();
+		maps = new ArrayList<WorkshopMap>();
 		viewMaps = new JFrame("View Maps");
 		viewMaps.setLocationByPlatform(true);
 		viewMaps.setResizable(false);
@@ -153,7 +153,7 @@ public class ViewMaps {
 	
 	
 	public void addMap(String steamURL){
-		newMap = new workshopMap(steamURL);
+		newMap = new WorkshopMap(steamURL);
 		maps.add(newMap);
 		listModel.addElement(newMap.getWorkshopTitle());
 		System.out.println("Current maps: " + maps);
