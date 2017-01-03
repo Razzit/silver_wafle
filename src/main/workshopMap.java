@@ -6,12 +6,12 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class workshopMap extends Client {
+public class WorkshopMap extends Client {
 	private String workshopTitle; //implemented
 	private String url;
 
 	
-	public workshopMap(String url){
+	public WorkshopMap(String url){
 		this.url = url;
 		setWorkshopTitle();
 		
