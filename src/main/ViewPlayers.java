@@ -49,7 +49,6 @@ public class ViewPlayers {
 	
 	
 	public ViewPlayers(){
-		
 		prepareGUI();
 		readFile();
 	}
@@ -86,7 +85,6 @@ public class ViewPlayers {
 		gbc_scrollPane.gridx = 0;
 		gbc_scrollPane.gridy = 0;
 		leftPanel.add(scrollPane, gbc_scrollPane);
-		
 		
 		
 
@@ -184,7 +182,7 @@ public class ViewPlayers {
 	private void writeToFile() {
 		try {
 			WriteFile writePlayers = new WriteFile(file_name, false);
-			writePlayers.writeToFile(players);
+			writePlayers.writeToPlayersFile(players);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -194,7 +192,7 @@ public class ViewPlayers {
 	private void readFile() {
 		try {
 			ReadFile file = new ReadFile(file_name);
-			players = file.OpenFile();
+			players = file.OpenPlayersFile();
 			
 			
 			for(int i = 0; i<players.size();i++){
