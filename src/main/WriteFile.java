@@ -16,12 +16,23 @@ public class WriteFile {
 		this.append_to_file = append_to_file;
 	}
 	
-	public void writeToFile(ArrayList<Players> players) throws IOException{
+	public void writeToPlayersFile(ArrayList<Players> players) throws IOException{
 		FileWriter write = new FileWriter(path, append_to_file);
 		print_line = new PrintWriter(write);
 		
 		for(int i = 0; i<players.size();i++){
 			print_line.printf("%s" + "%n", players.get(i).getName());
+		}
+		
+		print_line.close();
+	}
+	
+	public void writeToMapsFile(ArrayList<WorkshopMap> maps) throws IOException{
+		FileWriter write = new FileWriter(path, append_to_file);
+		print_line = new PrintWriter(write);
+		
+		for(int i = 0; i<maps.size();i++){
+			print_line.printf("%s|%s" + "%n", maps.get(i).getWorkshopURL(), maps.get(i).getWorkshopTitle());
 		}
 		
 		print_line.close();

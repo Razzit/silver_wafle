@@ -10,6 +10,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JButton;
+import javax.swing.WindowConstants;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -43,6 +44,8 @@ public class ViewMaps {
 	
 	int removeIndex = -1;
 	
+	String file_name = "maps.txt";
+	
 
 	
 	public ViewMaps(){
@@ -51,7 +54,10 @@ public class ViewMaps {
 
 	private void prepareGUI() {
 		maps = new ArrayList<WorkshopMap>();
+		//Read existing map data from file.
+		readFile();
 		viewMaps = new JFrame("View Maps");
+		viewMaps.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		viewMaps.setLocationByPlatform(true);
 		viewMaps.setResizable(false);
 		viewMaps.setPreferredSize(new Dimension(700, 500));
@@ -86,6 +92,9 @@ public class ViewMaps {
 		// TESTING STUFF HERE 
 		
 		listModel = new DefaultListModel<String>();
+		for(int i = 0; i<maps.size();i++){
+			listModel.addElement(maps.get(i).getWorkshopTitle());
+		}
 
 		list_1 = new JList<String>(listModel);
 		list_1.addListSelectionListener(new ListSelectionListener() {
@@ -136,28 +145,24 @@ public class ViewMaps {
 		
 		JButton btnBack = new JButton("Back");
 		btnBack.setFont(new Font("Malgun Gothic", Font.BOLD, 24));
+		/* Back Button, Button Press */
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				writeToFile();
 				viewMaps.setVisible(false);
 			}
 		});
 		panel.add(btnBack);
-		
-		
 	}
 	
 	public void setVisible(boolean val){
-		viewMaps.setVisible(val);
-		
+		viewMaps.setVisible(val);	
 	}
-	
 	
 	public void addMap(String steamURL){
 		newMap = new WorkshopMap(steamURL);
 		maps.add(newMap);
-		listModel.addElement(newMap.getWorkshopTitle());
-		System.out.println("Current maps: " + maps);
-		
+		listModel.addElement(newMap.getWorkshopTitle());	
 	}
 	
 	private void removeMap() {
@@ -170,6 +175,23 @@ public class ViewMaps {
 		}
 	}
 	
+	private void writeToFile(){
+		WriteFile writeFile = new WriteFile(file_name, false);
+		try {
+			writeFile.writeToMapsFile(maps);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void readFile(){
+		ReadFile readFile = new ReadFile(file_name);
+		try {
+			maps = readFile.openMapsFile();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	
 }

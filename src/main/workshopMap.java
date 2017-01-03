@@ -7,7 +7,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class WorkshopMap extends Client {
-	private String workshopTitle; //implemented
+	private String workshopTitle;
 	private String url;
 
 	
@@ -15,6 +15,11 @@ public class WorkshopMap extends Client {
 		this.url = url;
 		setWorkshopTitle();
 		
+	}
+	
+	public WorkshopMap(String url, String workshopTitle){
+		this.url = url;
+		this.workshopTitle = workshopTitle;
 	}
 	
 	
@@ -47,6 +52,10 @@ public class WorkshopMap extends Client {
 	
 	public String getWorkshopTitle(){
 		return workshopTitle;
+	}
+	
+	public String getWorkshopURL(){
+		return url;
 	}
 
 }
